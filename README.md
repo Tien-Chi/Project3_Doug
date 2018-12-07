@@ -1,27 +1,79 @@
-# p5.js-speech
-Web Audio Speech Synthesis and Speech Recognition Implementation for p5.js (http://p5js.org)
+# Notes by Tim
 
-R. Luke DuBois (dubois@nyu.edu)   
-[ABILITY Lab](http://abilitylab.nyu.edu) / [Brooklyn Experimental Media Center](http://bxmc.poly.edu)   
-NYU
+## Project idea
 
-This is a simple p5 extension to provide Web Speech (Synthesis and Recognition) API functionality.  It consists of two object classes (p5.Speech and p5.SpeechRec) along with accessor functions to speak and listen for text, change parameters (synthesis voices, recognition models, etc.), and retrieve callbacks from the system.
+Welcome home box
 
-Speech recognition requires launching from a server (e.g. a python simpleserver on a local machine).
+Inspiration: Gatebox (https://gatebox.ai/home/)
 
-## Simple Example (Synthesis)
-```
-var foo = new p5.Speech(); // speech synthesis object
-foo.speak('hi there'); // say something
-```
-## Simple Example (Recognition)
-```
-var foo = new p5.SpeechRec(); // speech recognition object (will prompt for mic access)
-foo.onResult = showResult; // bind callback function to trigger when speech is recognized
-foo.start(); // start listening
+I really wanted to use the speech recognition in p5 so I had the idea of a device that would say welcome home and ask “how’s your day?” and based on the response the device might react in different ways.
+Components
 
-function showResult()
-{
-  console.log(foo.resultString); // log the result
-}
-```
+•	Switch to turn the device on – metaphor for coming home and turning the lights on
+
+•	LED lights – adds visual ques to the device, different patterns can relate to different actions the user need to input
+
+•	Website – displays text and responses
+
+P5 bot – for LED code
+
+Fascial expression (emojis? Doesn’t have to be digital, can be lights)
+
+Projection? Or Robot (with visual interest)
+
+Projection – doormat
+
+Simple thing? 
+
+Something you carry around the day (sticker on) – smart watches, bag, jacket (non-visual interest)
+
+•	Knows how your day has been but still askes how your day has been
+
+•	Know events that happened in your day
+
+## Semi-final idea – Lock screen
+A device placed on a door that acts like a AI that asks you how your day is. The AI wants to make you happy so if you give it a negative response(Bad) it would not open. It will try to make you smile in different ways (animal pictures/funny pictures) so when you smile the door would open.
+
+The keeps angry or drunk persons from entering home?
+
+## Production ideas
+•	Illustration board as a door
+
+•	Box container for the Arduino
+
+•	Using the projector to project the screen onto the door OR phone screenshare
+
+•	“A smiling face from its owner could lead to a 'bonus'” - Sean 
+
+•	How the door opens using motor
+
+o	Sliding door
+
+o	String attached to the door and pulls on the door
+
+## Ideal user experience
+•	The user comes home and put their hand on the knob
+
+•	A screen appears that asks how your day
+
+•	If the person says good and smiles the door opens
+
+•	If the person says bad, the door will ask if it should cheer them up
+
+o	Saying yes will show a cute picture, trying to make the user smile, then opens the door
+
+o	Saying no, will make the door sad and (not open/open very slowly)
+
+## Presentation Doc
+•	Visualization of the project
+
+•	Project Statement, must be in a succinct format
+
+•	Project Value/Rationale/Concept
+
+•	Inspiration/Visual Research, examples of similar projects, influences on your direction
+
+## Inspiration:
+•	Gatebox (https://gatebox.ai/home/)
+
+•	SNFC “Europe. It’s Just Next Door” https://www.youtube.com/watch?v=GGW6Rm437tE
