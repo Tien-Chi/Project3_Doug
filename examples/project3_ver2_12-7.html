@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="../lib/p5.speech.js"></script>
+    <script>
+        var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+        //var myRec2 = new p5.SpeechRec(); // new P5.SpeechRec object
+        var homeVoice = new p5.Speech(); // new P5.Speech object
+        var badRes = new p5.Speech();
+        var goodRes = new p5.Speech();
+        var xRes = new p5.Speech();
+        myRec.continuous = true; // do continuous recognition
+        //myRec2.continuous = true; // do continuous recognition
+        //myRec.interimResults = true; // allow partial recognition (faster, less accurate)
+        var goodON = false;
+        var badON = false;
+        var firstRes = true;
+        //test for github
+        function setup() {
+            // graphics stuff:
+            createCanvas(800, 400);
+            background(255, 255, 255);
+            fill(0, 0, 0, 255);
+            // instructions:
+            textSize(32);
+            textAlign(CENTER);
+            text("How's your day", width / 2, height / 2);
+            myRec.onResult = showResult;
+            myRec.start();
+
+        }
+
+        function mousePressed() {
+            //act as a switch when the sensor is on
+            homeVoice.speak("How's your day?")
+
+        }
+
+
+        function draw() {
+            // why draw when you can click?
+        }
+        
+        /*Notes: Adjust pitch
+        Sad: low rate 10%, low pitch 20%
+        Tell: high rate (90), pitch high end
+        Cheer: high rate, high pitch
+        
+        */
+
+        function showResult() {
+
+            var mostrecentword = myRec.resultString;
+            if (mostrecentword.indexOf("good") !== -1) {
+                background(0, 255, 0);
+                text("oh, it’s good? Let me make a mess for you to clean up", width / 2, height / 2);
+                goodRes.speak("oh, it’s good? Let me make a mess for you to clean up!");
+                goodON = true;
+                
+
+            } else if (mostrecentword.indexOf("bad") !== -1) {
+                background(255, 0, 0);
+                text("Here, cheer up?", width / 2, height / 2);
+                badRes.speak("Here cheer up?");
+                //give reward to cheer user up
+                badON = true;
+
+            } else {
+                //if answer is not good or bad
+                if (firstRes === true) {
+                    background(255, 255, 255);
+                    xRes.speak("I'm going to make a mess");
+                    text("I'm going to make a mess", width / 2, height / 2);
+                    goodON = true;
+                    firstRes = false;
+                } else {
+                    console.log("do nothing")
+                }
+            
+            }
+            if (mostrecentword.indexOf("no") !== -1) {
+                background(255);
+
+                if (goodON === true) {
+                    //stops making a mess
+                    goodRes.speak("How's your day now?")
+
+                }
+            }
+            console.log(mostrecentword);
+
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
