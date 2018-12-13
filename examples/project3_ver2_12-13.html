@@ -1,0 +1,84 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+    <script src="../lib/p5.speech.js"></script>
+    <script>
+        var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
+        var wakeVoice = new p5.Speech(); // new P5.Speech object
+        myRec.continuous = true; // do continuous recognition
+        //myRec.interimResults = true; // allow partial recognition (faster, less accurate)
+        var timeup = false;
+        var coffee = false;
+        var firstRes = true;
+        var ansON = false;
+        var timer;
+        function setup() {
+            // graphics stuff:
+            createCanvas(800, 400);
+            background(255, 255, 255);
+            fill(0, 0, 0, 255);
+            // instructions:
+            textSize(32);
+            textAlign(CENTER);
+            text("Wake up", width / 2, height / 2);
+            myRec.onResult = showResult;
+            myRec.start();
+            //start timer
+            wakeVoice.speak("Beep beep, wake up it's eight o'clock.")
+
+        }
+
+
+
+        function draw() {
+            //background(255)
+            timer = millis();
+            //text('Milliseconds \nrunning: \n' + timer, 225, 40);
+            if (timer > 6000 && firstRes == true) {
+                firstRes = false;
+                wakeVoice.speak("Are you awake?");
+            }
+            if (timer > 16000 && ansON == false) {
+                timeup = true; 
+                console.log("times up")
+                //add robot smaches things here
+                //wreck = true
+                wakeVoice.speak("I'm going to make you wake up!");
+            }
+        }
+
+        /*Notes: Adjust pitch
+        Sad: low rate 10%, low pitch 20%
+        Tell: high rate (90), pitch high end
+        Cheer: high rate, high pitch
+        
+        */
+
+        function showResult() {
+
+            var mostrecentword = myRec.resultString;
+            if (mostrecentword.indexOf("yes") !== -1) {
+                if(ansON == true){
+                    //give coffee
+                    console.log("give coffee");
+                }
+                if(ansON == false){
+                //stop robot
+                //if wreck = true
+                    wakeVoice.speak("Would you like coffee?")
+                    ansON = true
+                }
+                
+            }
+            console.log(mostrecentword);
+
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
