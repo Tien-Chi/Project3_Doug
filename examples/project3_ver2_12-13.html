@@ -5,6 +5,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
     <script src="../lib/p5.speech.js"></script>
     <script>
+        //Edited by Tien-Chi Chu (Dec 13, 2018)
+        //Note: this will not work on Chrome Ver. 71
         var myRec = new p5.SpeechRec(); // new P5.SpeechRec object
         var wakeVoice = new p5.Speech(); // new P5.Speech object
         myRec.continuous = true; // do continuous recognition
@@ -26,6 +28,7 @@
             myRec.onResult = showResult;
             myRec.start();
             //start timer
+            wakeVoice.setPitch(100);
             wakeVoice.speak("Beep beep, wake up it's eight o'clock.")
 
         }
@@ -49,12 +52,6 @@
             }
         }
 
-        /*Notes: Adjust pitch
-        Sad: low rate 10%, low pitch 20%
-        Tell: high rate (90), pitch high end
-        Cheer: high rate, high pitch
-        
-        */
 
         function showResult() {
 
@@ -62,15 +59,21 @@
             if (mostrecentword.indexOf("yes") !== -1) {
                 if(ansON == true){
                     //give coffee
+                    //wreck = false
                     console.log("give coffee");
                 }
                 if(ansON == false){
                 //stop robot
-                //if wreck = true
+                //wreck = false
                     wakeVoice.speak("Would you like coffee?")
                     ansON = true
                 }
-                
+             if (mostrecentword.indexOf("no") !== -1) {
+                if(ansON == true){
+                    //wreck = true
+                }
+             }
+
             }
             console.log(mostrecentword);
 
